@@ -4,16 +4,16 @@ import {
     Primary as ButtonOutlinePrimary,
     ButtonOutline
 } from '@nichoth/components/htm/button-outline'
-import { createDebug } from '@bicycle-codes/debug'
 import ky from 'ky'
 import { State } from './state.js'
 import Router from './routes/index.js'
 import '@nichoth/components/button-outline.css'
 import './style.css'
+// import { createDebug } from '@bicycle-codes/debug'
+// const debug = createDebug()
 
 const router = Router()
 const state = State()
-const debug = createDebug()
 
 if (import.meta.env.DEV || import.meta.env.MODE === 'staging') {
     // @ts-expect-error DEV env
@@ -24,7 +24,6 @@ if (import.meta.env.DEV || import.meta.env.MODE === 'staging') {
 const json = await ky.get('/api/example').json()
 
 export const Example:FunctionComponent = function Example () {
-    debug('rendering example...')
     const match = router.match(state.route.value)
     const ChildNode = match.action(match, state.route)
 
